@@ -1,3 +1,8 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,19 +14,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>NoticeBoardList</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/sb-admin.css" rel="stylesheet">
+    <link href="../resources/bootstrap/css/sb-admin.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet">
+    <link href="../resources/bootstrap/css/plugins/morris.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../resources/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -86,26 +91,34 @@
                     <div class="col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-edit"></i> 공지사항 작성하기</h3>
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> 공지사항</h3>
                             </div>
-                            <form role="form">
-                                <div class="form-group">
-                                    <label>Title</label>
-                                    <input type="text" name='title' class="form-control" placeholder="Enter Title">
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 10px">BNO</th>
+                                                <th>TITLE</th>
+                                                <th>WRITER</th>
+                                                <th>REGDATE</th>
+                                                <th style="width: 40px">VIEWCNT</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach items="${list }" var="noticeBoardVO">
+                                            	<tr>
+                                            		<td>${noticeBoardVO.bno }</td>
+                                            		<td><a href='/noticeboard/read?bno=${noticeBoardVO.bno }'>${noticeBoardVO.title }</a></td>
+                                            		<td>${noticeBoardVO.writer }</td>
+                                            		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${noticeBoardVO.regdate }" /></td>
+                                            		<td>${noticeBoardVO.viewcnt }</td>
+                                            	</tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
-
-                                <div class="form-group">
-                                    <label>Content</label>
-                                    <textarea class="form-control" name="content" rows="3" placeholder="Enter ..."></textarea>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Writer</label>
-                                    <input type="text" name="writer" class="form-control" placeholder="Enter Writer">
-                                </div>
-
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -121,15 +134,24 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../resources/bootstrap/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../resources/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Morris Charts JavaScript -->
-    <script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>
+    <script src="../resources/bootstrap/js/plugins/morris/raphael.min.js"></script>
+    <script src="../resources/bootstrap/js/plugins/morris/morris.min.js"></script>
+    <script src="../resources/bootstrap/js/plugins/morris/morris-data.js"></script>
+    
+    <script>
+    	var result='${msg}';
+    	
+    	if(result == 'success'){
+    		alert("처리가 완료되었습니다. ");
+    	}
+    	
+    </script>
 
 </body>
 

@@ -3,6 +3,8 @@
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
  <configuration>
+ 	<!-- typeAliases를 작성하면 mapper를 작성할 때 매번
+ 	parameterType이나 resultType을 패키지까지 포함된 클래스명이 아니라 그냥 클래스명만 해도 됨 -->
  	<typeAliases>
  		<package name="com.fermat.domain" />
  	</typeAliases>
