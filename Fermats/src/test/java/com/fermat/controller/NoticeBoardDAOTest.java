@@ -1,16 +1,21 @@
 package com.fermat.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.fermat.domain.Criteria;
 import com.fermat.domain.NoticeBoardVO;
 import com.fermat.persistence.NoticeBoardDAO;
 
@@ -50,5 +55,41 @@ public class NoticeBoardDAOTest {
 	@Test
 	public void dtestDelete() throws Exception{
 		dao.delete(1);
+	}
+	
+	@Test
+	public void etestListPage() throws Exception{
+		int page = 3;
+		
+		List<NoticeBoardVO> list = dao.listPage(page);
+		
+		for(NoticeBoardVO boardVO : list){
+			logger.info(boardVO.getBno() + ":"+ boardVO.getTitle());
+		}
+	}
+	
+	@Test
+	public void ftestListCriteria() throws Exception{
+		Criteria cri = new Criteria();
+		cri.setPage(3);
+		cri.setPerPageNum(10);
+		
+		List<NoticeBoardVO> list = dao.listCriteria(cri);
+		
+		for(NoticeBoardVO boardVO : list){
+			logger.info(boardVO.getBno() + ":" + boardVO.getTitle());
+		}
+	}
+	
+	@Test
+	public void gtestURI() throws Exception{
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.path("/noticeboard/read")
+				.queryParam("bno", 12)
+				.queryParam("perPageNum", 20)
+				.build();
+		
+		logger.info("/noticeboard/read?bno=12&perPageNum=20");
+		logger.info(uriComponents.toString());
 	}
 }

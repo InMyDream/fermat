@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.fermat.domain.Criteria;
 import com.fermat.domain.NoticeBoardVO;
 import com.fermat.persistence.NoticeBoardDAO;
 
@@ -44,5 +45,19 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 		// TODO Auto-generated method stub
 		return dao.listAll();
 	}
+
+	@Override
+	public List<NoticeBoardVO> listCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listCriteria(cri);
+	}
+
+	@Override
+	public int listCountCriteria(Criteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.countPaging(cri);
+	}
+	
+	
 	
 }

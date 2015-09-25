@@ -111,7 +111,7 @@
 
                                 <div class="form-group">
                                     <label for="disabledSelect">Writer</label>
-                                    <input class="form-control" type="text" name="writer" value="${noticeBoardVO.writer }">
+                                    <input class="form-control" id="disabledInput" type="text" value="${noticeBoardVO.writer }" disabled>
                                 </div>
                                 
                                 
