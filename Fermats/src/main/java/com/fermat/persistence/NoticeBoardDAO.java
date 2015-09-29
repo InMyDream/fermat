@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fermat.domain.Criteria;
 import com.fermat.domain.NoticeBoardVO;
+import com.fermat.domain.SearchCriteria;
 
 public interface NoticeBoardDAO {
 	
@@ -17,11 +18,14 @@ public interface NoticeBoardDAO {
 	
 	public List<NoticeBoardVO> listAll() throws Exception;
 	
-	//페이지를 인자로 넘기면 그 페이지에 해당하는 목록을 보여줌
 	public List<NoticeBoardVO> listPage(int page) throws Exception;
 	
 	public List<NoticeBoardVO> listCriteria(Criteria cri) throws Exception;
 	
 	public int countPaging(Criteria cri) throws Exception;
+	
+	public List<NoticeBoardVO> listSearch(SearchCriteria cri) throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri) throws Exception;
 
 }

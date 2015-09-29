@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fermat.domain.Criteria;
 import com.fermat.domain.NoticeBoardVO;
+import com.fermat.domain.SearchCriteria;
 
 public interface NoticeBoardService {
 	
@@ -21,4 +22,8 @@ public interface NoticeBoardService {
 	
 	//전체 게시물의 갯수 반환하는 메서드
 	public int listCountCriteria(Criteria cri) throws Exception;
+	
+	public List<NoticeBoardVO> listSearchCriteria(SearchCriteria cri) throws Exception;
+	
+	public int listSearchCount(SearchCriteria cri) throws Exception;
 }

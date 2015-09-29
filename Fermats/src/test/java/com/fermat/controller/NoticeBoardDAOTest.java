@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fermat.domain.Criteria;
 import com.fermat.domain.NoticeBoardVO;
+import com.fermat.domain.SearchCriteria;
 import com.fermat.persistence.NoticeBoardDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,8 +33,8 @@ public class NoticeBoardDAOTest {
 	@Test
 	public void atestCreate() throws Exception{
 		NoticeBoardVO board = new NoticeBoardVO();
-		board.setTitle("새로운 글을 넣습니다 ");
-		board.setContent("새로운 글을 넣습니다 ");
+		board.setTitle("test");
+		board.setContent("test");
 		board.setWriter("user00");
 		dao.create(board);
 	}
@@ -47,8 +48,8 @@ public class NoticeBoardDAOTest {
 	public void ctestUpdate() throws Exception{
 		NoticeBoardVO board = new NoticeBoardVO();
 		board.setBno(1);
-		board.setTitle("수정된 글입니다 ");
-		board.setContent("수정 테스트" );
+		board.setTitle("update");
+		board.setContent("update" );
 		dao.update(board);
 	}
 	
@@ -91,5 +92,25 @@ public class NoticeBoardDAOTest {
 		
 		logger.info("/noticeboard/read?bno=12&perPageNum=20");
 		logger.info(uriComponents.toString());
+	}
+	
+	@Test
+	public void htestDynamic1() throws Exception{
+		SearchCriteria cri = new SearchCriteria();
+		cri.setPage(1);
+		cri.setKeyword("글");
+		cri.setSearchType("t");
+		
+		logger.info("===============================");
+		
+		List<NoticeBoardVO> list = dao.listSearch(cri);
+		
+		for(NoticeBoardVO boardVO : list){
+			logger.info(boardVO.getBno()+":"+boardVO.getTitle());
+		}
+		
+		logger.info("===============================");
+		
+		logger.info("COUNT: "+dao.listSearchCount(cri));
 	}
 }

@@ -70,10 +70,23 @@ public class PageMaker {
 	    return cri;
 	}
 	
+	//페이징 처리에 필요한 데이터를 생성하는 역할
 	public String makeQuery(int page){
 		UriComponents uriComponents = UriComponentsBuilder.newInstance()
 				.queryParam("page", page)
 				.queryParam("perPageNum", cri.getPerPageNum())
+				.build();
+		
+		return uriComponents.toUriString();
+	}
+	
+	//페이징 처리에 필요한 데이터를 생성하는 역할(searchType, keyword)포함
+	public String makeSearch(int page){
+		UriComponents uriComponents = UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("searchType", ((SearchCriteria)cri).getSearchType())
+				.queryParam("keyword", ((SearchCriteria)cri).getKeyword())
 				.build();
 		
 		return uriComponents.toUriString();

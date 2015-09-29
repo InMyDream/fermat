@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.fermat.domain.Criteria;
 import com.fermat.domain.NoticeBoardVO;
+import com.fermat.domain.SearchCriteria;
 import com.fermat.persistence.NoticeBoardDAO;
 
 @Service
@@ -56,6 +57,18 @@ public class NoticeBoardServiceImpl implements NoticeBoardService{
 	public int listCountCriteria(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		return dao.countPaging(cri);
+	}
+
+	@Override
+	public List<NoticeBoardVO> listSearchCriteria(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearch(cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return dao.listSearchCount(cri);
 	}
 	
 	

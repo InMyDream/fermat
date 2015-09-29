@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.fermat.domain.Criteria;
 import com.fermat.domain.NoticeBoardVO;
+import com.fermat.domain.SearchCriteria;
 
 @Repository
 public class NoticeBoardDAOImpl implements NoticeBoardDAO{
@@ -72,6 +73,20 @@ public class NoticeBoardDAOImpl implements NoticeBoardDAO{
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+".countPaging", cri);
 	}
+
+	@Override
+	public List<NoticeBoardVO> listSearch(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace+".listSearch", cri);
+	}
+
+	@Override
+	public int listSearchCount(SearchCriteria cri) throws Exception {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+".listSearchCount", cri);
+	}
+	
+	
 	
 	
 }
