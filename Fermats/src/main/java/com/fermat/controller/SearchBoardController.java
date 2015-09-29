@@ -1,5 +1,8 @@
 package com.fermat.controller;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,6 +29,10 @@ public class SearchBoardController {
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public void listPage(@ModelAttribute("cri") SearchCriteria cri, Model model) throws Exception{
+		if(cri.getKeyword() != null){
+			String temp = URLDecoder.decode(cri.getKeyword());
+			cri.setKeyword(temp);
+		}
 		
 		logger.info(cri.toString());
 		

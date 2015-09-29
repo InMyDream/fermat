@@ -7,7 +7,15 @@
 <html lang="ko">
 
 <head>
-
+<%
+	String temp = request.getParameter("keyword");
+	String temp1 = null;
+	if(temp != null){
+		temp1 = java.net.URLDecoder.decode(temp);
+	}else{
+		temp1 = "";
+	}
+%>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -115,7 +123,7 @@
                             			</select>
                             		</div>
                             		
-                            		<input type="text" name='keyword' id="keywordInput" value='${cri.keyword }'>
+                            			<input type="text" name='keyword' id="keywordInput" value=<%=temp1 %>>
 										<button id='searchBtn'>검색</button>
 										<button id='newBtn'>글쓰기</button>                            		
                             	</div>
@@ -190,7 +198,9 @@
     <script>
     	$(document).ready(function(){
     		$('#searchBtn').on("click", function(event){
-    			self.location="list"+'${pageMaker.makeQuery(1)}'+"&searchType="+$("select option:selected").val()+"&keyword="+$('#keywordInput').val();
+    			var keywordInput = $('#keywordInput').val();
+    			
+    			self.location="list"+'${pageMaker.makeQuery(1)}'+"&searchType="+$("select option:selected").val()+"&keyword="+escape(encodeURIComponent(keywordInput));
     		});
     		
     		$('#newBtn').on("click", function(evt){
